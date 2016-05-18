@@ -1,0 +1,7 @@
+<h1>All Users</h1>
+<% @user.each do |u| %>
+	<p><%= u.name %></p>
+<% end %>
+
+<button><a href="/users/<%= session['user_id'] %>">Show Profile</a></button>
+<button><a href="/secrets">All Secrets</a></button>

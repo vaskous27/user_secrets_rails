@@ -1,0 +1,35 @@
+<h1><%= @user.name %></h1>
+
+<% @user.secrets.each do |secret| %>
+<p><%= secret.content %></p>
+<p><%= secret.likes.count %> Likes</p>
+<p><form action='/secrets/<%= secret.id %>' method='post'>
+	 <input type='hidden' name="authenticity_token" value="<%= form_authenticity_token %>">
+	  <input type='hidden' name="_method" value="delete">
+	 <button type="submit" name="Delete">Delete</button>
+</form></p>
+
+<% end %>
+
+
+<form action="/secrets" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<!-- <input type="hidden" name="secret[user_id]" value="<%= @user.id %>"> -->
+	<p>
+		<label>Tell a Secret:</label>
+		<textarea name="secret[content]"></textarea>	
+	</p>
+	<input type="submit" value="Post">
+</form>
+
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <p><%= e %></p>
+  <% end %>
+<% end %>
+
+<Button id='Edit'><a href="/users/edit/<%= session['user_id'] %>">Edit</a></Button>
+<Button><a href="/users">All Users</a></Button>
+
+
